@@ -18,6 +18,7 @@ const scopes = [
   "user-read-playback-state",
   "user-modify-playback-state",
   "user-read-currently-playing",
+  "user-follow-read"
 ].join(",");
 
 const params = {
@@ -25,6 +26,9 @@ const params = {
 };
 
 const LOGIN_URL = `https://accounts.spotify.com/authorize?${params.scope}`.toString();
+
+console.log("LOGIN URL = ", LOGIN_URL);
+console.log("Scopes = ", params.scope);
 
 // @ts-expect-error
 async function refreshAccessToken(token) {
@@ -62,7 +66,7 @@ export const authOptions = {
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID ?? "",
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET ?? "",
-      authorization: LOGIN_URL,
+      authorization: { params: { scope: params.scope.toString() }},
     }),
     // ...add more providers here
   ],

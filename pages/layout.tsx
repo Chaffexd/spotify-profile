@@ -11,7 +11,7 @@ export default function Layout({
 
   return (
     <>
-      <main className="flex sm:flex-row flex-col h-screen w-full">
+      <main className="flex sm:flex-row flex-col h-full w-full overflow-auto">
         {session.status === "authenticated" && <Navbar />}
         {children}
         {session.status === "authenticated" && <MobileNav />}

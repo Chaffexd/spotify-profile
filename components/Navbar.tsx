@@ -12,7 +12,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden sm:flex flex-col justify-between bg-black items-center">
+    <nav className="hidden xl:flex flex-col justify-between bg-black items-center h-screen fixed">
       <div>
         <Link href={"/login"}>
           <FaSpotify className="pt-8 w-24 h-24" style={{ color: "#1DB954" }} />
