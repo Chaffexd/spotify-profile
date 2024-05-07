@@ -45,14 +45,14 @@ const TopTracks = ({ topTracks }: TopTrackProps) => {
       <div className="flex justify-between items-center mb-4">
         <h1>Top Tracks of All Time</h1>
         <button className="border border-white border-solid w-28 h-10 rounded-full hover:bg-white hover:text-black">
-          <Link href={"/artists"}>See More</Link>
+          <Link href={"/tracks"}>See More</Link>
         </button>
       </div>
       <div>
         {items?.slice(0, 10).map((track) => (
           <div key={track.external_ids.isrc} className="mb-4">
             <Link
-              href={`/artist/${track.id}`}
+              href={`/track/${track.id}`}
               className="flex items-center gap-8 hover:bg-gray-500 rounded p-2"
             >
               <Image

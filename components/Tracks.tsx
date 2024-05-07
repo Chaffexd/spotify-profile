@@ -104,7 +104,7 @@ const Tracks = ({
       <section className="w-full h-full flex flex-col flex-wrap justify-center">
         {items?.map((track) => (
           <div key={track.id} className="text-white mb-8 hover:bg-gray-500 rounded p-4 flex items-center">
-            <Link href={`/artist/${track.id}`} className="flex items-center w-full justify-between">
+            <Link href={`/track/${track.id}`} className="flex items-center w-full justify-between">
               <div className="flex items-center">
                 <Image
                   src={track?.album.images[0].url}

@@ -1,6 +1,6 @@
 import IconLoader from "@/components/Loader";
 import Tracks from "@/components/Tracks";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -61,6 +61,11 @@ const TracksPage = () => {
 
         if (!long.ok || !medium.ok || !short.ok) {
           console.log("Something went wrong fetching artists.");
+        }
+
+        if (long.status === 401 || medium.status === 401 || short.status === 401) {
+          router.push("/login")
+          signOut()
         }
       } catch (error) {
         console.log("Something went wrong getting tracks: ", error);

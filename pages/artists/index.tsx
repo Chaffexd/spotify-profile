@@ -1,6 +1,6 @@
 import Artists from "@/components/Artists";
 import IconLoader from "@/components/Loader";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -64,6 +64,11 @@ const AristsPage = () => {
 
         if (!long.ok || !medium.ok || !short.ok) {
           console.log("Something went wrong fetching artists.");
+        }
+
+        if (long.status === 401 || medium.status === 401 || short.status === 401) {
+          router.push("/login")
+          signOut()
         }
 
         const dataLong = await long.json();

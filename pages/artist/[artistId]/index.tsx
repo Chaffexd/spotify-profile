@@ -1,10 +1,12 @@
 import ArtistDetail from "@/components/ArtistDetail";
 import IconLoader from "@/components/Loader";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const ArtistDetailPage = () => {
+  const router = useRouter();
   const [loading, isLoading] = useState(false);
   const [artistData, setArtistData] = useState();
   const params = useParams();
@@ -27,6 +29,11 @@ const ArtistDetailPage = () => {
 
         if (!artistResponse.ok) {
           throw new Error("Error getting artist!");
+        }
+
+        if (artistResponse.status === 401) {
+          router.push("/login")
+          signOut()
         }
 
         const artistData = await artistResponse.json();
