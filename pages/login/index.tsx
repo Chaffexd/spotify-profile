@@ -14,7 +14,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center">
       {session ? (
         <button
           className="border border-white border-solid p-2 w-28 h-10 rounded-full hover:bg-white hover:text-black text-white"
@@ -24,10 +24,10 @@ const LoginPage = () => {
         </button>
       ) : (
         <button
-          className="border border-white border-solid p-2 w-28 h-10 rounded-full hover:bg-white hover:text-black text-white"
+          className="border border-white border-solid p-2 w-48 h-10 rounded-full hover:bg-white hover:text-black text-white"
           onClick={() => signIn('spotify', { callbackUrl: '/' })}
         >
-          SIGN IN
+          Sign in with Spotify
         </button>
       )}
     </div>

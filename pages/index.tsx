@@ -133,8 +133,14 @@ export default function Home() {
         />
       )}
       <div className="text-white mt-8 flex w-full h-full p-12 gap-12 flex-col lg:flex-row items-center">
-        <TopArtists topArtists={topArtists} />
-        <TopTracks topTracks={topTracks} />
+        <TopArtists
+          //@ts-ignore
+          topArtists={topArtists}
+        />
+        <TopTracks
+          //@ts-ignore
+          topTracks={topTracks}
+        />
       </div>
     </div>
   );
