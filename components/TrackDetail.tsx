@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+type PitchClass = { [key: number]: string };
+
 type TrackDataProps = {
   trackData: {
     album: {
@@ -19,62 +21,62 @@ type TrackDataProps = {
       name: string;
     };
     name: string;
-    popularity: number
+    popularity: number;
   };
   trackAnalysis: {
     track: {
-        duration: number
-        key: number
-        time_signature: number
-        tempo: number
-        mode: number
-    }
-    bars: {}[]
-    beats: {}[]
-    segments: {}[]
-    sections: {}[]
+      duration: number;
+      key: number;
+      time_signature: number;
+      tempo: number;
+      mode: number;
+    };
+    bars: {}[];
+    beats: {}[];
+    segments: {}[];
+    sections: {}[];
   };
   trackFeatures: {};
 };
 
-const pitchClasses = [
-    {
-        0: "C"
-    },
-    {
-        1: "C♯"
-    },
-    {
-        2: "D"
-    },
-    {
-        3: "D♯"
-    },
-    {
-        4: "E"
-    },
-    {
-        5: "F"
-    },
-    {
-        6: "F♯"
-    },
-    {
-        7: "G"
-    },
-    {
-        8: "G♯"
-    },
-    {
-        9: "A"
-    },
-    {
-        10: "B♭"
-    },
-    {
-        11: "B"
-    }
-]
+const pitchClasses: PitchClass[] = [
+  {
+    0: "C",
+  },
+  {
+    1: "C♯",
+  },
+  {
+    2: "D",
+  },
+  {
+    3: "D♯",
+  },
+  {
+    4: "E",
+  },
+  {
+    5: "F",
+  },
+  {
+    6: "F♯",
+  },
+  {
+    7: "G",
+  },
+  {
+    8: "G♯",
+  },
+  {
+    9: "A",
+  },
+  {
+    10: "B♭",
+  },
+  {
+    11: "B",
+  },
+];
 
 const TrackDetail = ({
   trackData,
@@ -99,7 +101,7 @@ const TrackDetail = ({
   function getPitchClass(key: number) {
     const pitchIndex = key % 12;
     // @ts-expect-error
-    return pitchClasses.find(pitch => Object.keys(pitch)[0] == pitchIndex)[pitchIndex];
+    return pitchClasses.find((pitch) => Object.keys(pitch)[0] == pitchIndex)[pitchIndex];
   }
 
   return (
@@ -131,46 +133,50 @@ const TrackDetail = ({
       <div className="mt-12 flex items-center flex-col">
         <div className="flex-row flex">
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{`${minutes}:${seconds.toFixed(0)}`}</p>
-            <p>Duration</p>
+            <p className="font-bold text-3xl">{`${minutes}:${seconds.toFixed(
+              0
+            )}`}</p>
+            <p className="text-slate-400">Duration</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{getPitchClass(key)}</p>
-            <p>Key</p>
+            {key && <p className="font-bold text-3xl">{getPitchClass(key)}</p>}
+            <p className="text-slate-400">Key</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{mode === 0 ? "Minor" : "Major"}</p>
-            <p>Modality</p>
+            <p className="font-bold text-3xl">
+              {mode === 0 ? "Minor" : "Major"}
+            </p>
+            <p className="text-slate-400">Modality</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{time_signature}</p>
-            <p>Time Signature</p>
+            <p className="font-bold text-3xl">{time_signature}</p>
+            <p className="text-slate-400">Time Signature</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{Math.ceil(tempo)}</p>
-            <p>Tempo (BPM)</p>
+            <p className="font-bold text-3xl">{Math.ceil(tempo)}</p>
+            <p className="text-slate-400">Tempo (BPM)</p>
           </div>
         </div>
         <div className="flex-row flex">
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{popularity}%</p>
-            <p>Popularity</p>
+            <p className="font-bold text-3xl">{popularity}%</p>
+            <p className="text-slate-400">Popularity</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{bars.length}</p>
-            <p>Bars</p>
+            {bars && <p className="font-bold text-3xl">{bars?.length}</p>}
+            <p className="text-slate-400">Bars</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{beats.length}</p>
-            <p>Beats</p>
+            <p className="font-bold text-3xl">{beats?.length}</p>
+            <p className="text-slate-400">Beats</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{sections.length}</p>
-            <p>Sections</p>
+            <p className="font-bold text-3xl">{sections?.length}</p>
+            <p className="text-slate-400">Sections</p>
           </div>
           <div className="border border-slate-200 text-center py-4 w-40">
-            <p className="font-bold text-2xl">{segments.length}</p>
-            <p>Segments</p>
+            <p className="font-bold text-3xl">{segments?.length}</p>
+            <p className="text-slate-400">Segments</p>
           </div>
         </div>
       </div>
