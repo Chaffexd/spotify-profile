@@ -12,7 +12,7 @@ const MobileNav = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="xl:hidden flex bg-black items-center w-full h-auto absolute bottom-0">
+    <nav className="xl:hidden flex bg-black items-center w-full h-auto fixed bottom-0 ">
       <div className={`flex items-center text-white w-full`}>
         <Link
           href={"/"}

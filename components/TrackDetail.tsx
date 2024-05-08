@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FeatureChart from "./FeatureChart";
 
 type PitchClass = { [key: number]: string };
 
@@ -83,13 +84,6 @@ const TrackDetail = ({
   trackAnalysis,
   trackFeatures,
 }: TrackDataProps) => {
-  console.log("Track Analysis = ", trackAnalysis);
-  console.log("Track Data = ", trackData);
-  // console.log("Track Features = ", trackFeatures);
-
-  // duration, key, modality, time signature, tempo (BPM) --
-  // popularity, bars, beats, sections, segments
-
   const { popularity } = trackData || {};
   const { track, bars, beats, segments, sections } = trackAnalysis || {};
 
@@ -105,13 +99,14 @@ const TrackDetail = ({
   }
 
   return (
-    <div className="w-full h-screen text-white pl-44 pt-20 pr-12">
-      <div className="flex gap-8">
+    <div className="w-full h-screen text-white xl:pl-44 pt-20 xl:pr-12 px-12">
+      <div className="flex md:flex-row flex-col gap-8">
         <Image
           src={trackData?.album?.images[1]?.url}
           width={trackData?.album?.images[1]?.width}
           height={trackData?.album?.images[1]?.height}
           alt={`Image of ${trackData?.album?.artists[0]?.name}`}
+          className=""
         />
         <div>
           <p className="text-6xl font-bold mb-2">{trackData?.name}</p>
@@ -131,7 +126,7 @@ const TrackDetail = ({
         </div>
       </div>
       <div className="mt-12 flex items-center flex-col">
-        <div className="flex-row flex">
+        <div className="flex-row flex-wrap flex">
           <div className="border border-slate-200 text-center py-4 w-40">
             <p className="font-bold text-3xl">{`${minutes}:${seconds.toFixed(
               0
@@ -157,7 +152,7 @@ const TrackDetail = ({
             <p className="text-slate-400">Tempo (BPM)</p>
           </div>
         </div>
-        <div className="flex-row flex">
+        <div className="flex-row flex flex-wrap">
           <div className="border border-slate-200 text-center py-4 w-40">
             <p className="font-bold text-3xl">{popularity}%</p>
             <p className="text-slate-400">Popularity</p>
@@ -179,7 +174,11 @@ const TrackDetail = ({
             <p className="text-slate-400">Segments</p>
           </div>
         </div>
+        <FeatureChart 
+        // @ts-expect-error
+        trackFeatures={trackFeatures} />
       </div>
+      
     </div>
   );
 };

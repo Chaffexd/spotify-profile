@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className={`flex flex-col text-white text-center`}>
         <Link
           href={"/"}
-          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent
+          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent hover:bg-gray-700
           ${pathname === "/" ? "!border-l-green-500 bg-gray-700" : ""}`}
         >
           <CgProfile className="h-8 w-8 pb-1" />
@@ -29,7 +29,7 @@ const Navbar = () => {
         </Link>
         <Link
           href={"/artists"}
-          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent
+          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent hover:bg-gray-700
           ${pathname === "/artists" ? "!border-l-green-500 bg-gray-700" : ""}`}
         >
           <GiMicrophone className="h-8 w-8 pb-1" />
@@ -37,7 +37,7 @@ const Navbar = () => {
         </Link>
         <Link
           href={"/tracks"}
-          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent
+          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent hover:bg-gray-700
           ${pathname === "/tracks" ? "!border-l-green-500 bg-gray-700" : ""}`}
         >
           <IoMusicalNotes className="h-8 w-8 pb-1" />
@@ -45,7 +45,7 @@ const Navbar = () => {
         </Link>
         <Link
           href={"/recent"}
-          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent
+          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent hover:bg-gray-700
           ${pathname === "/recent" ? "!border-l-green-500 bg-gray-700" : ""}`}
         >
           <GiBackwardTime className="h-8 w-8 pb-1" />
@@ -53,7 +53,7 @@ const Navbar = () => {
         </Link>
         <Link
           href={"/playlists"}
-          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent
+          className={`px-6 py-4 flex items-center flex-col border-l-4 border-l-transparent hover:bg-gray-700
           ${pathname === "/playlists" ? "!border-l-green-500 bg-gray-700" : ""}`}
         >
           <RiPlayListFill className="h-8 w-8 pb-1" />
