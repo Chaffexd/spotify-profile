@@ -121,16 +121,16 @@ const FeatureChart = ({ trackFeatures }: TrackFeaturesProps) => {
     <>
       <canvas
         id="chart"
+        className="my-12"
         width={200}
         height={200}
-        className="my-12"
       />
       <Link
         href={
           "https://developer.spotify.com/documentation/web-api/reference/get-audio-features"
         }
         target="_blank"
-        className="mb-20 mt-4 hover:underline"
+        className="pb-20 mt-4 hover:underline text-center"
       >
         Full Description of Spotify's Audio Features
       </Link>

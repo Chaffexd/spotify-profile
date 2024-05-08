@@ -95,7 +95,9 @@ const TrackDetail = ({
   function getPitchClass(key: number) {
     const pitchIndex = key % 12;
     // @ts-expect-error
-    return pitchClasses.find((pitch) => Object.keys(pitch)[0] == pitchIndex)[pitchIndex];
+    return pitchClasses.find((pitch) => Object.keys(pitch)[0] == pitchIndex)[
+      pitchIndex
+    ];
   }
 
   return (
@@ -174,11 +176,13 @@ const TrackDetail = ({
             <p className="text-slate-400">Segments</p>
           </div>
         </div>
-        <FeatureChart 
-        // @ts-expect-error
-        trackFeatures={trackFeatures} />
+        <div className="xl:w-3/4 xl:h-[700px] flex items-center flex-col">
+          <FeatureChart
+            // @ts-expect-error
+            trackFeatures={trackFeatures}
+          />
+        </div>
       </div>
-      
     </div>
   );
 };
