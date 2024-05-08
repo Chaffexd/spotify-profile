@@ -25,7 +25,6 @@ const properties = [
 ];
 
 const FeatureChart = ({ trackFeatures }: TrackFeaturesProps) => {
-  console.log("Track Features = ", trackFeatures);
   let myChart = null;
 
   const {
