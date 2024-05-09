@@ -48,7 +48,15 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
     liveness,
     speechiness,
     valence,
-  } = trackFeatures || {};
+  } = trackFeatures || {
+    acousticness: 0,
+    danceability: 0,
+    energy: 0,
+    instrumentalness: 0,
+    liveness: 0,
+    speechiness: 0,
+    valence: 0,
+  };
 
   useEffect(() => {
     const ctx = document.getElementById("chart");
@@ -136,10 +144,6 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
       },
     });
   }, [trackFeatures]);
-
-  if (trackFeatures === undefined) {
-    return <p>Loading...</p>
-  }
 
   return (
     <>
