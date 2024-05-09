@@ -147,7 +147,7 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
         target="_blank"
         className="pb-20 mt-4 hover:underline text-center"
       >
-        Full Description of Spotify's Audio Features
+        Full Description of Spotify&apos;s Audio Features
       </Link>
     </>
   );
