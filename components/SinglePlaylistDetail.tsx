@@ -37,7 +37,24 @@ type PlaylistProps = {
         };
       }[];
     };
-    averages: {};
+  };
+  trackFeatures: {
+    acousticness: number;
+    danceability: number;
+    energy: number;
+    instrumentalness: number;
+    liveness: number;
+    speechiness: number;
+    valence: number;
+  };
+  averages: {
+    acousticness: number;
+    danceability: number;
+    energy: number;
+    instrumentalness: number;
+    liveness: number;
+    speechiness: number;
+    valence: number;
   };
 };
 
@@ -57,7 +74,7 @@ const SinglePlaylistDetail = ({ playlist, averages }: PlaylistProps) => {
         <h1 className="mt-4 text-xl font-bold">{playlist.name}</h1>
         <h2 className="mb-4">By {playlist.owner.display_name}</h2>
         <h3 className="text-sm">{playlist.tracks.items.length} Tracks</h3>
-        <FeatureChart averages={averages} />
+        <FeatureChart averages={averages} trackFeatures={averages} />
       </div>
       <div className="w-full text-white">
         {playlist?.tracks?.items?.map((track) => (

@@ -19,7 +19,7 @@ interface Playlist {
   external_urls: string;
   images: { width: number; height: number; url: string }[];
   name: string;
-  owner: { name: string };
+  owner: { display_name: string };
   tracks: {
     items: {
       track: {
@@ -32,11 +32,21 @@ interface Playlist {
   };
 }
 
+interface Averages {
+  acousticness: number;
+  danceability: number;
+  energy: number;
+  instrumentalness: number;
+  liveness: number;
+  speechiness: number;
+  valence: number;
+}
+
 const PlaylistDetailPage = () => {
   const { data: session } = useSession();
   const [loading, isLoading] = useState(false);
   const [playlist, setPlaylist] = useState<Playlist | undefined>();
-  const [averages, setAverages] = useState();
+  const [averages, setAverages] = useState<Averages | undefined>();
   const params = useParams();
   const router = useRouter();
 
@@ -68,7 +78,9 @@ const PlaylistDetailPage = () => {
         const playlistData = await userPlaylist.json();
         setPlaylist(playlistData);
 
-        const trackIds = playlistData?.tracks.items.map((item) => item.track.id);
+        const trackIds = playlistData?.tracks.items.map(
+          (item: any) => item.track.id
+        );
 
         const audioFeatures = await fetch(
           `https://api.spotify.com/v1/audio-features?ids=${trackIds}
@@ -85,14 +97,21 @@ const PlaylistDetailPage = () => {
         const audioFeaturesData = await audioFeatures.json();
         console.log("Audio Features =", audioFeaturesData);
 
-        const averages = {};
+        const averages: Averages = {
+          acousticness: 0,
+          danceability: 0,
+          energy: 0,
+          instrumentalness: 0,
+          liveness: 0,
+          speechiness: 0,
+          valence: 0,
+        };
 
         properties.forEach((property) => {
-          averages[property] = avg(audioFeaturesData.audio_features, property)
+          averages[property as keyof Averages] = avg(audioFeaturesData.audio_features, property);
         });
 
-        setAverages(averages)
-
+        setAverages(averages);
       } catch (error) {
         console.error("Something went wrong...", error);
         isLoading(false);
@@ -113,7 +132,11 @@ const PlaylistDetailPage = () => {
   }
   return (
     <div className="w-full text-white xl:pl-44 pt-20 xl:pr-12 px-12 max-w-screen-xl m-auto">
-      {playlist && <SinglePlaylistDetail playlist={playlist} averages={averages} />}
+      {playlist && (
+        <SinglePlaylistDetail 
+        // @ts-expect-error
+        playlist={playlist} averages={averages} />
+      )}
     </div>
   );
 };
