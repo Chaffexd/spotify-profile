@@ -137,6 +137,10 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
     });
   }, [trackFeatures]);
 
+  if (trackFeatures === undefined) {
+    return <p>Loading...</p>
+  }
+
   return (
     <>
       <canvas id="chart" className="my-12" width={200} height={200} />
