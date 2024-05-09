@@ -38,23 +38,23 @@ const RecentlyPlayed = ({ recentlyPlayed }: RecentProps) => {
     <div className="flex flex-col">
       {recentlyPlayed?.items?.map((track) => (
         <div
-          className="flex items-center my-4 hover:bg-gray-500 mr-16 p-2 rounded"
+          className="flex items-center my-4 hover:bg-gray-500 mr-16 rounded"
           key={track.track.album.name}
         >
           <Link
             href={`track/${track.track.id}`}
-            className="flex items-center justify-between w-full my-4 hover:bg-gray-500 rounded"
+            className="flex items-center justify-between w-full my-4 px-4 hover:bg-gray-500 rounded"
           >
             <Image
-              src={track.track.album.images[2].url}
-              width={track.track.album.images[2].width}
-              height={track.track.album.images[2].height}
+              src={track.track.album.images[0].url}
+              width={track.track.album.images[0].width}
+              height={track.track.album.images[0].height}
               alt={`Image of ${track.track.album.artists[0].name}`}
-              className="mr-4"
+              className="mr-4 w-[100px] h-[100px]"
             />
             <div className="w-full flex justify-between items-center">
               <div>
-                <p>{track.track.name}</p>
+                <p className="text-2xl font-bold">{track.track.name}</p>
                 <div className="flex">
                   <h2 className="mr-2">{track.track.album.artists[0].name}</h2>
                   &#x2022;

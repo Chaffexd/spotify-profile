@@ -1,12 +1,10 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 
 const LoginPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
-
-  console.log("Session = ", session);
 
   // @ts-ignore
   if (session?.accessToken) {

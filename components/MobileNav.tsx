@@ -16,7 +16,7 @@ const MobileNav = () => {
       <div className={`flex items-center text-white w-full`}>
         <Link
           href={"/"}
-          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px]
+          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px] hover:bg-gray-700
           ${pathname === "/" ? "!border-t-green-500 bg-gray-700" : ""}`}
         >
           <CgProfile className="h-6 w-6 pb-1" />
@@ -24,7 +24,7 @@ const MobileNav = () => {
         </Link>
         <Link
           href={"/artists"}
-          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px]
+          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px] hover:bg-gray-700
           ${pathname === "/artists" ? "!border-t-green-500 bg-gray-700" : ""}`}
         >
           <GiMicrophone className="h-6 w-6 pb-1" />
@@ -32,7 +32,7 @@ const MobileNav = () => {
         </Link>
         <Link
           href={"/tracks"}
-          className={`px-2 py-2 flex flex-1 text-center items-center flex-col border-t-4 border-t-transparent text-[10px]
+          className={`px-2 py-2 flex flex-1 text-center items-center flex-col border-t-4 border-t-transparent text-[10px] hover:bg-gray-700
           ${pathname === "/tracks" ? "!border-t-green-500 bg-gray-700" : ""}`}
         >
           <IoMusicalNotes className="h-6 w-6 pb-1" />
@@ -40,7 +40,7 @@ const MobileNav = () => {
         </Link>
         <Link
           href={"/recent"}
-          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px]
+          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px] hover:bg-gray-700
           ${pathname === "/recent" ? "!border-t-green-500 bg-gray-700" : ""}`}
         >
           <GiBackwardTime className="h-6 w-6 pb-1" />
@@ -48,7 +48,7 @@ const MobileNav = () => {
         </Link>
         <Link
           href={"/playlists"}
-          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px]
+          className={`px-2 py-2 flex flex-1 items-center text-center flex-col border-t-4 border-t-transparent text-[10px] hover:bg-gray-700
           ${
             pathname === "/playlists" ? "!border-t-green-500 bg-gray-700" : ""
           }`}

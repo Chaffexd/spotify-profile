@@ -1,14 +1,21 @@
 import IconLoader from "@/components/Loader";
 import RecentlyPlayed from "@/components/RecentlyPlayed";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const RecentPage = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const [loading, isLoading] = useState(false);
   const [recentlyPlayed, setRecentlyPlayer] = useState();
 
   useEffect(() => {
+    console.log("Session = ", session)
+    if (session === undefined) {
+      router.push("/login")
+    }
+
     const fetchRecent = async () => {
       try {
         isLoading(true);
@@ -46,7 +53,7 @@ const RecentPage = () => {
   }
 
   return (
-    <div className="w-full text-white xl:pl-44 pt-20 xl:pr-12 px-12">
+    <div className="w-full text-white xl:pl-44 pt-20 xl:pr-12 px-12 max-w-screen-xl m-auto">
       <h1 className="font-bold text-2xl mb-4">Recently Played</h1>
       <RecentlyPlayed 
       // @ts-expect-error

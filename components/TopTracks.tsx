@@ -53,7 +53,7 @@ const TopTracks = ({ topTracks }: TopTrackProps) => {
           <div key={track.external_ids.isrc} className="mb-4">
             <Link
               href={`/track/${track.id}`}
-              className="flex items-center gap-8 hover:bg-gray-500 rounded p-2"
+              className="flex items-center gap-8 hover:bg-gray-700 rounded p-2"
             >
               <Image
                 src={track.album.images[2].url}

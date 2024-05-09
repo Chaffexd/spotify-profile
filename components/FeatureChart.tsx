@@ -12,6 +12,15 @@ type TrackFeaturesProps = {
     speechiness: {};
     valence: {};
   };
+  averages: {
+    acousticness: {};
+    danceability: {};
+    energy: {};
+    instrumentalness: {};
+    liveness: {};
+    speechiness: {};
+    valence: {};
+  };
 };
 
 const properties = [
@@ -24,8 +33,12 @@ const properties = [
   "valence",
 ];
 
-const FeatureChart = ({ trackFeatures }: TrackFeaturesProps) => {
+const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
   let myChart = null;
+
+  console.log("Chart avgs = ", averages.acousticness);
+  console.log("Chart trackFeatures = ", trackFeatures);
+  // console.log(properties.map(property => averages[property]))
 
   const {
     acousticness,
@@ -49,13 +62,21 @@ const FeatureChart = ({ trackFeatures }: TrackFeaturesProps) => {
           {
             label: "Features",
             data: [
-              acousticness,
-              danceability,
-              energy,
-              instrumentalness,
-              liveness,
-              speechiness,
-              valence,
+              typeof acousticness === "number"
+                ? acousticness
+                : averages.acousticness,
+              typeof danceability === "number"
+                ? danceability
+                : averages.danceability,
+              typeof energy === "number" ? energy : averages.energy,
+              typeof instrumentalness === "number"
+                ? instrumentalness
+                : averages.instrumentalness,
+              typeof liveness === "number" ? liveness : averages.liveness,
+              typeof speechiness === "number"
+                ? speechiness
+                : averages.speechiness,
+              typeof valence === "number" ? valence : averages.valence,
             ],
             backgroundColor: [
               "rgba(255, 99, 132, 0.3)",
@@ -118,12 +139,7 @@ const FeatureChart = ({ trackFeatures }: TrackFeaturesProps) => {
 
   return (
     <>
-      <canvas
-        id="chart"
-        className="my-12"
-        width={200}
-        height={200}
-      />
+      <canvas id="chart" className="my-12" width={200} height={200} />
       <Link
         href={
           "https://developer.spotify.com/documentation/web-api/reference/get-audio-features"
