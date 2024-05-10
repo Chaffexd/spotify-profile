@@ -34,8 +34,6 @@ const properties = [
 ];
 
 const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
-  let myChart = null;
-
   console.log("Chart avgs = ", averages.acousticness);
   console.log("Chart trackFeatures = ", trackFeatures);
   // console.log(properties.map(property => averages[property]))
@@ -60,6 +58,8 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
 
   useEffect(() => {
     const ctx = document.getElementById("chart");
+
+    if (!ctx) return;
 
     // @ts-expect-error
     new Chart(ctx, {
@@ -143,7 +143,7 @@ const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
         },
       },
     });
-  }, [trackFeatures]);
+  }, [trackFeatures, averages]);
 
   return (
     <>
