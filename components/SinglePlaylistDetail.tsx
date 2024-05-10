@@ -62,8 +62,8 @@ const SinglePlaylistDetail = ({ playlist, averages }: PlaylistProps) => {
   console.log("Averages =", averages);
 
   return (
-    <div className="flex gap-20">
-      <div className="w-1/3 text-center">
+    <div className="flex md:flex-row flex-col gap-20">
+      <div className="md:w-1/3 text-center">
         <Image
           src={playlist.images[0].url}
           width={300}
@@ -88,11 +88,11 @@ const SinglePlaylistDetail = ({ playlist, averages }: PlaylistProps) => {
                 className="mr-4"
               />
               <div>
-                <p>{track.track.name}</p>
+                <p className="sm:text-lg text-sm">{track.track.name}</p>
                 <div className="flex">
-                  <p className="mr-2">{track.track.artists[0].name}</p>
+                  <p className="mr-2 sm:text-lg text-sm">{track.track.artists[0].name}</p>
                   &#x2022;
-                  <p className="ml-2">{track.track.album.name}</p>
+                  <p className="ml-2 sm:text-lg text-sm">{track.track.album.name}</p>
                 </div>
               </div>
             </div>

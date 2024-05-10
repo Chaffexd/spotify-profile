@@ -131,7 +131,7 @@ const PlaylistDetailPage = () => {
     );
   }
   return (
-    <div className="w-full text-white xl:pl-44 pt-20 xl:pr-12 px-12 max-w-screen-xl m-auto">
+    <div className="w-full text-white xl:pl-44 pt-20 xl:pr-12 px-4 max-w-screen-xl m-auto">
       {playlist && (
         <SinglePlaylistDetail 
         // @ts-expect-error
