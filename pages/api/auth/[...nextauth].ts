@@ -32,9 +32,6 @@ console.log("Scopes = ", params.scope);
 
 // @ts-expect-error
 async function refreshAccessToken(token) {
-  const params = new URLSearchParams();
-  params.append("refresh_token", token.refreshToken);
-
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
@@ -48,10 +45,17 @@ async function refreshAccessToken(token) {
             process.env.SPOTIFY_CLIENT_SECRET
         ).toString("base64"),
     },
-    body: params,
+    // @ts-expect-error
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: token.refreshToken,
+      client_id: process.env.SPOTIFY_CLIENT_ID
+    }),
   });
 
   const data = await response.json();
+
+  console.log("DATA FOR TOKEN = ", data)
 
   return {
     accessToken: data.access_token,
@@ -94,6 +98,7 @@ export const authOptions = {
     // @ts-expect-error
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token from a provider.
+      console.log("SESSION TOKEN = ", token)
       session.accessToken = token.accessToken;
       return session;
     },

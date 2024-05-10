@@ -36,8 +36,6 @@ const formatDuration = (milliseconds: number) => {
 };
 
 const TopTracks = ({ topTracks }: TopTrackProps) => {
-  console.log("Top Tracks = ", topTracks);
-
   const { items } = topTracks || [];
 
   return (

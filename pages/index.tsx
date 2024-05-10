@@ -2,13 +2,13 @@ import IconLoader from "@/components/Loader";
 import TopArtists from "@/components/TopArtists";
 import TopTracks from "@/components/TopTracks";
 import UserProfile from "@/components/UserProfile";
+import { useHttp } from "@/hooks/useHttp";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const [token, setToken] = useState();
   const [profile, setProfile] = useState();
   const [followedArtists, setFollowedArtists] = useState();
   const [userPlaylists, setUserPlaylists] = useState();
@@ -16,18 +16,20 @@ export default function Home() {
   const [topTracks, setTopTracks] = useState();
   const [loading, isLoading] = useState(false);
   const { data: session } = useSession();
+  const { test } = useHttp(
+    "https://api.spotify.com/v1/me",
+    // @ts-expect-error
+    session?.accessToken
+  );
+
+  console.log("Hook Profile = ", test);
 
   useEffect(() => {
+    console.log("SESSION TOKEN = ", session);
     //@ts-expect-error
     if (!session?.user || session.status === "unauthenticated") {
       router.push("/login");
       return;
-    }
-    //@ts-expect-error
-    if (session && session.accessToken) {
-      //@ts-expect-error
-      setToken(session.accessToken);
-      // console.log("HOME SESSION = ", session);
     }
 
     const fetchProfile = async () => {
@@ -36,7 +38,8 @@ export default function Home() {
         const userProfile = await fetch("https://api.spotify.com/v1/me", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`,
+            // @ts-expect-error
+            Authorization: `Bearer ${session.accessToken}`,
           },
         });
 
@@ -47,14 +50,14 @@ export default function Home() {
         const userProfileData = await userProfile.json();
 
         setProfile(userProfileData);
-        console.log("Data from Spotify = ", userProfileData);
 
         const followedArtists = await fetch(
           "https://api.spotify.com/v1/me/following?type=artist",
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`,
+              // @ts-expect-error
+              Authorization: `Bearer ${session.accessToken}`,
             },
           }
         );
@@ -68,7 +71,8 @@ export default function Home() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`,
+              // @ts-expect-error
+              Authorization: `Bearer ${session.accessToken}`,
             },
           }
         );
@@ -81,7 +85,8 @@ export default function Home() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`,
+              // @ts-expect-error
+              Authorization: `Bearer ${session.accessToken}`,
             },
           }
         );
@@ -94,14 +99,14 @@ export default function Home() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`,
+              // @ts-expect-error
+              Authorization: `Bearer ${session.accessToken}`,
             },
           }
         );
 
         const topTracksResponse = await topTracks.json();
         setTopTracks(topTracksResponse);
-        console.log("Top tracks = ", topTracksResponse);
       } catch (error) {
         isLoading(false);
         console.error("error = ", error);
@@ -111,7 +116,7 @@ export default function Home() {
     };
 
     fetchProfile();
-  }, [session, token]);
+  }, [session]);
 
   if (loading)
     return (

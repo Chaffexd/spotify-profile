@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="hidden xl:flex flex-col justify-between bg-black items-center h-screen fixed">
       <div>
-        <Link href={"/login"}>
+        <Link href={"/"}>
           <FaSpotify className="pt-8 w-24 h-24" style={{ color: "#1DB954" }} />
         </Link>
       </div>
