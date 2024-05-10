@@ -34,8 +34,8 @@ const properties = [
 ];
 
 const FeatureChart = ({ trackFeatures, averages }: TrackFeaturesProps) => {
-  console.log("Chart avgs = ", averages.acousticness);
-  console.log("Chart trackFeatures = ", trackFeatures);
+  // console.log("Chart avgs = ", averages.acousticness);
+  // console.log("Chart trackFeatures = ", trackFeatures);
   // console.log(properties.map(property => averages[property]))
 
   const {
