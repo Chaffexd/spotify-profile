@@ -1,5 +1,6 @@
 import IconLoader from "@/components/Loader";
 import Tracks from "@/components/Tracks";
+import { useHttp } from "@/hooks/useHttp";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -7,77 +8,30 @@ import React, { useEffect, useState } from "react";
 const TracksPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const [topTracksShort, setTopTracksShort] = useState();
-  const [topTracksMedium, setTopTracksMedium] = useState();
-  const [topTracksLong, setTopTracksLong] = useState();
+  // const [topTracksShort, setTopTracksShort] = useState();
+  // const [topTracksMedium, setTopTracksMedium] = useState();
+  // const [topTracksLong, setTopTracksLong] = useState();
   const [loading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchTracks = async () => {
-      try {
-        setIsLoading(true);
+  const { data: topTracksShort, loading: loadingShort } = useHttp(
+    "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term",
+    // @ts-expect-error
+    session?.accessToken
+  );
 
-        const short = await fetch(
-          "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term",
-          {
-            method: "GET",
-            headers: {
-              // @ts-expect-error
-              Authorization: `Bearer ${session.accessToken}`,
-            },
-          }
-        );
+  const { data: topTracksMedium, loading: loadingMedium } = useHttp(
+    "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
+    // @ts-expect-error
+    session?.accessToken
+  );
 
-        const dataShort = await short.json();
-        setTopTracksShort(dataShort);
+  const { data: topTracksLong, loading: loadingLong } = useHttp(
+    "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term",
+    // @ts-expect-error
+    session?.accessToken
+  );
 
-        const medium = await fetch(
-          "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term",
-          {
-            method: "GET",
-            headers: {
-              // @ts-expect-error
-              Authorization: `Bearer ${session.accessToken}`,
-            },
-          }
-        );
-
-        const dataMedium = await medium.json();
-        setTopTracksMedium(dataMedium);
-
-        const long = await fetch(
-          "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term",
-          {
-            method: "GET",
-            headers: {
-              // @ts-expect-error
-              Authorization: `Bearer ${session.accessToken}`,
-            },
-          }
-        );
-
-        const dataLong = await long.json();
-        setTopTracksLong(dataLong);
-
-        if (!long.ok || !medium.ok || !short.ok) {
-          console.log("Something went wrong fetching artists.");
-        }
-
-        if (long.status === 401 || medium.status === 401 || short.status === 401) {
-          router.push("/login")
-          signOut()
-        }
-      } catch (error) {
-        console.log("Something went wrong getting tracks: ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchTracks();
-  }, [session]);
-
-  if (loading) {
+  if (loadingShort || loadingMedium || loadingLong) {
     return (
       <div className="flex justify-center items-center w-full h-screen">
         <IconLoader />

@@ -1,10 +1,18 @@
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export function useHttp(url: string, token: string) {
-  const [test, setData] = useState(null);
+  const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { data: session } = useSession();
+  
   useEffect(() => {
+    if (session === undefined) {
+      router.push("/login");
+    }
     async function getData() {
       try {
         setLoading(true);
@@ -13,6 +21,10 @@ export function useHttp(url: string, token: string) {
             Authorization: `Bearer ${token}`,
           },
         });
+
+        if (!response.ok) {
+          console.error("Something went wrong...", response)
+        }
 
         const userData = await response.json();
         setData(userData);
@@ -26,7 +38,7 @@ export function useHttp(url: string, token: string) {
     }
 
     getData();
-  }, [url]);
+  }, [url, session]);
 
-  return { test, error, loading };
+  return { data, error, loading };
 }
